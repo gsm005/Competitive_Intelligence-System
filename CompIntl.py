@@ -130,7 +130,7 @@ data['month'] = data['reviews.date'].dt.to_period('M')
 average_ratings_by_month = data.groupby('month')['reviews.rating'].mean()
 # Create a line chart using matplotlib
 def plot_performance_chart():
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(4, 6))
     
     # Convert the Period values to strings
     x_values = average_ratings_by_month.index.to_timestamp().strftime('%Y-%m')
