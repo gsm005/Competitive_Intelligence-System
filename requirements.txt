@@ -24,6 +24,7 @@ jsonschema-specifications
 langcodes
 markdown-it-py
 MarkupSafe
+matplotlib
 mdurl
 murmurhash
 nltk
