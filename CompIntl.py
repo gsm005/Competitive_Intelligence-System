@@ -170,9 +170,9 @@ def main():
         st_lottie(lottie_coding, height=300,width=800,key='coding')
     if st.button("Analyze"):
             st.write(f"Analyzing the product : {product_link}")
-            st.subheader("Product Performance Chart")
             l1_col,r1_col=st.columns(2)
             with r1_col:
+                st.subheader("Product Performance Chart")
                 plot_performance_chart()
             with l1_col:
                 l_col,r_col=st.columns(2)
