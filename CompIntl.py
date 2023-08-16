@@ -49,7 +49,7 @@ def perform_topic_modeling(data_path, num_topics=5, passes=5):
     neg_text = df_neg['reviews.text']
 
     stopwords_list=[]
-    custom_sw =['however', 'first', 'custom', 'stopword', 'list'] 
+    custom_sw =['satisfied','however', 'first', 'custom', 'stopword', 'list','grandson','daughter','uncle','father','samsung','wayyy','happy','very','open','year','couple','prefer','upgrade','regular','stand','solid','granddaughter','slowwwwww','upgrade','excited','purchase','available','clash','matter','galaxy','common','wayyyyy','satisfied']
     stopwords_list.extend(custom_sw)
 
     lemmatized_texts_pos = preprocess_text(pos_text)
