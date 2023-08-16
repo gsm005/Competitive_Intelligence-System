@@ -130,7 +130,7 @@ data['month'] = data['reviews.date'].dt.to_period('M')
 average_ratings_by_month = data.groupby('month')['reviews.rating'].mean()
 # Create a line chart using matplotlib
 def plot_performance_chart():
-    plt.figure(figsize=(4, 6))
+    plt.figure(figsize=(10, 6))
     
     # Convert the Period values to strings
     x_values = average_ratings_by_month.index.to_timestamp().strftime('%Y-%m')
@@ -171,16 +171,19 @@ def main():
     if st.button("Analyze"):
             st.write(f"Analyzing the product : {product_link}")
             st.subheader("Product Performance Chart")
-            plot_performance_chart()
-            l_col,r_col=st.columns(2)
-            with l_col:  
-                st.write("Best Perfoming Categories:")            
-                for words in topics_pos_text:
-                     st.markdown(f"<span style='color:green'>{', '.join(words)}</span>", unsafe_allow_html=True)
-            with r_col:
-                st.write("Areas for Improvement:")
-                for words in topics_neg_text:
-                     st.markdown(f"<span style='color:red'>{', '.join(words)}</span>", unsafe_allow_html=True)
+            l1_col,r1_col=st.columns(2)
+            with r1_col:
+                plot_performance_chart()
+            with l1_col:
+                l_col,r_col=st.columns(2)
+                with l_col:  
+                    st.write("Best Perfoming Categories:")            
+                    for words in topics_pos_text:
+                        st.markdown(f"<span style='color:green'>{', '.join(words)}</span>", unsafe_allow_html=True)
+                with r_col:
+                    st.write("Areas for Improvement:")
+                    for words in topics_neg_text:
+                        st.markdown(f"<span style='color:red'>{', '.join(words)}</span>", unsafe_allow_html=True)
 
 main()
 
