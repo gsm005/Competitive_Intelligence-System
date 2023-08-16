@@ -166,7 +166,9 @@ def main():
         st.subheader("Hi, This is an Advanced Competitive Intelligence System")
         st.write("Enter the product link:")
         product_link = st.text_input("Product Link", "")
-        if st.button("Analyze"):
+    with col2:
+        st_lottie(lottie_coding, height=300,width=800,key='coding')
+    if st.button("Analyze"):
             st.write(f"Analyzing the product : {product_link}")
             st.subheader("Product Performance Chart")
             plot_performance_chart()
@@ -179,8 +181,6 @@ def main():
                 st.write("Areas for Improvement:")
                 for words in topics_neg_text:
                      st.markdown(f"<span style='color:red'>{', '.join(words)}</span>", unsafe_allow_html=True)
-    with col2:
-        st_lottie(lottie_coding, height=300,width=800,key='coding')
 
 main()
 
