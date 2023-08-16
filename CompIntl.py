@@ -143,11 +143,11 @@ def main():
             with l_col:  
                 st.write("Best Perfoming Categories:")            
                 for words in topics_pos_text:
-                    st.write(f" {words}")
+                     st.markdown(f"<span style='color:green'>{', '.join(words)}</span>", unsafe_allow_html=True)
             with r_col:
                 st.write("Areas for Improvement:")
                 for words in topics_neg_text:
-                    st.write(f" {words}")
+                     st.markdown(f"<span style='color:red'>{', '.join(words)}</span>", unsafe_allow_html=True)
     with col2:
         st_lottie(lottie_coding, height=300,width=800,key='coding')
 
