@@ -8,6 +8,7 @@ import requests
 from streamlit_lottie import st_lottie
 import nltk
 import streamlit as st;
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Product Insights",page_icon=":tada:",layout="wide")
 
@@ -123,6 +124,35 @@ def load_lottieurl(url):
     return r.json()
 
 lottie_coding=load_lottieurl("https://lottie.host/23dbc176-5338-47c8-98f3-61a5379cafa7/Vysd3RBFnc.json")
+data = pd.read_csv("Walmart Reviews.csv")
+data['reviews.date'] = pd.to_datetime(data['reviews.date'])
+data['month'] = data['reviews.date'].dt.to_period('M')  
+average_ratings_by_month = data.groupby('month')['reviews.rating'].mean()
+# Create a line chart using matplotlib
+def plot_performance_chart():
+    plt.figure(figsize=(10, 6))
+    
+    # Convert the Period values to strings
+    x_values = average_ratings_by_month.index.to_timestamp().strftime('%Y-%m')
+    
+    plt.plot(x_values, average_ratings_by_month.values, marker='o')
+    plt.title('Average Ratings Over Time')
+    plt.xlabel('Month')
+    plt.ylabel('Average Rating')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+
+    # Convert the plot to an image and display in Streamlit
+    image = plt_to_image(plt)
+    st.image(image, use_column_width=True)
+
+# Function to convert Matplotlib plot to image
+def plt_to_image(plt):
+    from io import BytesIO
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    return buf
 
 def main():
     data_path = "Walmart Reviews.csv"  # Update the path to your CSV file
@@ -138,7 +168,8 @@ def main():
         product_link = st.text_input("Product Link", "")
         if st.button("Analyze"):
             st.write(f"Analyzing the product : {product_link}")
-
+            st.subheader("Product Performance Chart")
+            plot_performance_chart()
             l_col,r_col=st.columns(2)
             with l_col:  
                 st.write("Best Perfoming Categories:")            
